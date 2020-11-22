@@ -13,20 +13,20 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author Luiz Felipe (https://github.com/luizfp)
  */
-public final class RestClient {
+public final class RestClientConfig {
     private static final Retrofit RETROFIT;
     @NotNull
     private static final ConcurrentMap<String, Object> SERVICE_CACHE = new ConcurrentHashMap<>();
 
     static {
         RETROFIT = new Retrofit.Builder()
-                .addConverterFactory(MoshiConverterFactory.create(MoshiUtils.provideMoshi()))
+                .addConverterFactory(MoshiConverterFactory.create(MoshiConfig.provideMoshi()))
                 .baseUrl(NetworkConstants.BASE_API_URL)
-                .client(OkHttp.provideNetworkDefaultClient())
+                .client(OkHttpConfig.provideNetworkDefaultClient())
                 .build();
     }
 
-    private RestClient() {
+    private RestClientConfig() {
 
     }
 

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Luiz Felipe (https://github.com/luizfp)
  */
-public final class MoshiUtils {
+public final class MoshiConfig {
     private static final Moshi MOSHI;
 
     static {

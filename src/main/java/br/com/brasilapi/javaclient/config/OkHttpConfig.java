@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Luiz Felipe (https://github.com/luizfp)
  */
-public final class OkHttp {
+public final class OkHttpConfig {
     private static final long DEFAULT_TIMEOUT_SECONDS = TimeUnit.SECONDS.toSeconds(30);
     @NotNull
     private static final OkHttpClient DEFAULT_CLIENT;
@@ -24,8 +24,8 @@ public final class OkHttp {
         DEFAULT_CLIENT = builder.build();
     }
 
-    private OkHttp() {
-        throw new IllegalStateException(OkHttp.class.getSimpleName() + " cannot be instantiated!");
+    private OkHttpConfig() {
+        throw new IllegalStateException(OkHttpConfig.class.getSimpleName() + " cannot be instantiated!");
     }
 
     @NotNull

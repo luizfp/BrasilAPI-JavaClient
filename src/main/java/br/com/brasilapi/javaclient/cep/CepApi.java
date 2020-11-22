@@ -1,7 +1,7 @@
 package br.com.brasilapi.javaclient.cep;
 
 import br.com.brasilapi.javaclient.network.request.CallExecutor;
-import br.com.brasilapi.javaclient.config.RestClient;
+import br.com.brasilapi.javaclient.config.RestClientConfig;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 
@@ -20,7 +20,7 @@ public final class CepApi {
 
     @NotNull
     public Address findByCep(@NotNull final String cep) {
-        final CepService service = RestClient.getService(CepService.class);
+        final CepService service = RestClientConfig.getService(CepService.class);
         final Call<Address> call = service.findCepInformation(cep);
         return callExecutor.execute(call);
     }

@@ -1,6 +1,6 @@
 package br.com.brasilapi.javaclient.json;
 
-import br.com.brasilapi.javaclient.config.MoshiUtils;
+import br.com.brasilapi.javaclient.config.MoshiConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ public final class JsonParser {
 
     @NotNull
     public static String toJson(@NotNull final Object object) {
-        return MoshiUtils.provideMoshi().adapter(Object.class).toJson(object);
+        return MoshiConfig.provideMoshi().adapter(Object.class).toJson(object);
     }
 
     @NotNull
@@ -26,7 +26,7 @@ public final class JsonParser {
             throws IOException {
         final T t;
         try {
-            t = MoshiUtils.provideMoshi().adapter(type).fromJson(json);
+            t = MoshiConfig.provideMoshi().adapter(type).fromJson(json);
         } catch (final Throwable throwable) {
             throw new IllegalStateException("Error to parse JSON", throwable);
         }
