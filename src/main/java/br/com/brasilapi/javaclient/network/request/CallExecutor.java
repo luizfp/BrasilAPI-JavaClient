@@ -1,4 +1,4 @@
-package br.com.brasilapi.javaclient.network;
+package br.com.brasilapi.javaclient.network.request;
 
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
