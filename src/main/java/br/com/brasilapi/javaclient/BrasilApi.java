@@ -21,6 +21,6 @@ public final class BrasilApi {
 
     @NotNull
     public Address findByCep(@NotNull final String cep) {
-        return cepApi.findCepInformation(cep);
+        return cepApi.findByCep(cep);
     }
 }

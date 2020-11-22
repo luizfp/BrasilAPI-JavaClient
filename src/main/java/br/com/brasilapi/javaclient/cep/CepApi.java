@@ -19,7 +19,7 @@ public final class CepApi {
     }
 
     @NotNull
-    public Address findCepInformation(@NotNull final String cep) {
+    public Address findByCep(@NotNull final String cep) {
         final CepService service = RestClient.getService(CepService.class);
         final Call<Address> call = service.findCepInformation(cep);
         return callExecutor.execute(call);
