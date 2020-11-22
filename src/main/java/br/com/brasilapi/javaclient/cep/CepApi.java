@@ -1,7 +1,7 @@
 package br.com.brasilapi.javaclient.cep;
 
 import br.com.brasilapi.javaclient.network.request.CallExecutor;
-import br.com.brasilapi.javaclient.network.RestClient;
+import br.com.brasilapi.javaclient.config.RestClient;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 

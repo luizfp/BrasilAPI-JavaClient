@@ -1,6 +1,6 @@
-package br.com.brasilapi.javaclient.network;
+package br.com.brasilapi.javaclient.config;
 
-import br.com.brasilapi.javaclient.json.MoshiUtils;
+import br.com.brasilapi.javaclient.network.NetworkConstants;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;

@@ -1,5 +1,6 @@
 package br.com.brasilapi.javaclient.json;
 
+import br.com.brasilapi.javaclient.config.MoshiUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

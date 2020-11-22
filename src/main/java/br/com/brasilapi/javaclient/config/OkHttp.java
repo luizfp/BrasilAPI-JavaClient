@@ -1,4 +1,4 @@
-package br.com.brasilapi.javaclient.network;
+package br.com.brasilapi.javaclient.config;
 
 import okhttp3.OkHttpClient;
 import org.jetbrains.annotations.NotNull;

@@ -1,4 +1,4 @@
-package br.com.brasilapi.javaclient.json;
+package br.com.brasilapi.javaclient.config;
 
 import com.squareup.moshi.Moshi;
 import org.jetbrains.annotations.NotNull;
