@@ -1,5 +1,6 @@
 package br.com.brasilapi.javaclient.config;
 
+import br.com.brasilapi.javaclient.Injection;
 import br.com.brasilapi.javaclient.network.NetworkConstants;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Retrofit;
@@ -20,9 +21,9 @@ public final class RestClientConfig {
 
     static {
         RETROFIT = new Retrofit.Builder()
-                .addConverterFactory(MoshiConverterFactory.create(MoshiConfig.provideMoshi()))
+                .addConverterFactory(Injection.provideMoshiConverterFactory())
                 .baseUrl(NetworkConstants.BASE_API_URL)
-                .client(OkHttpConfig.provideNetworkDefaultClient())
+                .client(Injection.provideOkHttpClient())
                 .build();
     }
 

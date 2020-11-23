@@ -1,12 +1,8 @@
 package br.com.brasilapi.javaclient.cep;
 
-import br.com.brasilapi.javaclient.cep.error.CepErrorHandler;
+import br.com.brasilapi.javaclient.Injection;
 import br.com.brasilapi.javaclient.network.ErrorListener;
 import br.com.brasilapi.javaclient.network.SuccessListener;
-import br.com.brasilapi.javaclient.json.JsonParser;
-import br.com.brasilapi.javaclient.network.errorhandler.ResponseErrorHandler;
-import br.com.brasilapi.javaclient.network.request.CallExecutor;
-import br.com.brasilapi.javaclient.network.request.DefaultResponseHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +23,7 @@ public final class CepRequest {
 
     public CepRequest(@NotNull final String cep) {
         this.cep = cep;
-        this.cepApi = new CepApi(new CallExecutor(new DefaultResponseHandler(), new CepErrorHandler(new JsonParser())));
+        this.cepApi = Injection.provideCepApi();
     }
 
     @NotNull
