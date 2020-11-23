@@ -12,18 +12,17 @@ import java.io.IOException;
  */
 public final class JsonParser {
 
-    private JsonParser() {
-        throw new IllegalStateException(JsonParser.class.getSimpleName() + " cannot be instantiated!");
+    public JsonParser() {
+
     }
 
     @NotNull
-    public static String toJson(@NotNull final Object object) {
+    public String toJson(@NotNull final Object object) {
         return MoshiConfig.provideMoshi().adapter(Object.class).toJson(object);
     }
 
     @NotNull
-    public static <T> T fromJson(@NotNull final Class<T> type, @NotNull final String json)
-            throws IOException {
+    public <T> T fromJson(@NotNull final String json, @NotNull final Class<T> type) {
         final T t;
         try {
             t = MoshiConfig.provideMoshi().adapter(type).fromJson(json);

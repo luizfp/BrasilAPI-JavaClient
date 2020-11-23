@@ -12,5 +12,5 @@ import retrofit2.http.Path;
 public interface CepService {
 
     @GET("cep/v1/{cep}")
-    Call<Address> findCepInformation(@Path("cep") final String cep);
+    Call<Address> findByCep(@Path("cep") final String cep);
 }

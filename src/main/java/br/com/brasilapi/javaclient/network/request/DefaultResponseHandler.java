@@ -1,8 +1,14 @@
 package br.com.brasilapi.javaclient.network.request;
 
+import br.com.brasilapi.javaclient.cep.error.CepError;
+import br.com.brasilapi.javaclient.network.errorhandler.ErrorResponse;
+import br.com.brasilapi.javaclient.network.errorhandler.RequestException;
+import br.com.brasilapi.javaclient.network.errorhandler.ResponseErrorHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import retrofit2.Response;
+
+import java.util.Objects;
 
 /**
  * Created on 2020-11-22
@@ -13,19 +19,15 @@ public class DefaultResponseHandler implements ResponseHandler {
 
     @NotNull
     @Override
-    public <T> T handleResponse(@Nullable final Response<T> response)  {
-        if (response != null) {
-            if (response.isSuccessful() && response.body() != null) {
-                return response.body();
-            } else {
-                // Aqui significa que a resposta recebida é um erro.
-                if (response.errorBody() == null) {
-                    throw new RuntimeException("Error!");
-                }
-                throw new IllegalStateException("Error empty!");
-            }
+    public <T> T handleResponse(@Nullable final Response<T> response) {
+        if (isResponseSuccess(response)) {
+            return Objects.requireNonNull(response.body());
         } else {
-            throw new RuntimeException("Error!");
+            throw new RequestException(ErrorResponse.of(response));
         }
+    }
+
+    private <T> boolean isResponseSuccess(@Nullable final Response<T> response) {
+        return response != null && response.isSuccessful() && response.body() != null;
     }
 }
