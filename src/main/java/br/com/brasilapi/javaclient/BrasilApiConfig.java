@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
-import java.util.Objects;
 
 /**
  * Created on 2020-11-23
@@ -13,7 +12,13 @@ import java.util.Objects;
  */
 public final class BrasilApiConfig {
     @NotNull
+    private static final BrasilApiConfig DEFAULT_CONFIG;
+    @NotNull
     private final Duration networkTimeout;
+
+    static {
+        DEFAULT_CONFIG = new BrasilApiConfig(Duration.ofSeconds(Constants.DEFAULT_NETWORK_TIMEOUT_SECONDS));
+    }
 
     private BrasilApiConfig(@NotNull final Duration networkTimeout) {
         this.networkTimeout = networkTimeout;
@@ -24,23 +29,12 @@ public final class BrasilApiConfig {
         return networkTimeout;
     }
 
-    public static final class Builder {
-        @Nullable
-        private Duration networkTimeout;
-
-        public Builder() {
-        }
-
-        public Builder withNetworkTimeout(@NotNull final Duration networkTimeout) {
-            this.networkTimeout = networkTimeout;
-            return this;
-        }
-
-        @NotNull
-        public BrasilApiConfig build() {
-            return new BrasilApiConfig(
-                    Objects.requireNonNull(networkTimeout, "networkTimeout cannot be null!")
-            );
+    @NotNull
+    public static BrasilApiConfig of(@Nullable final Duration networkTimeout) {
+        if (networkTimeout == null) {
+            return BrasilApiConfig.DEFAULT_CONFIG;
+        } else {
+            return new BrasilApiConfig(networkTimeout);
         }
     }
 }

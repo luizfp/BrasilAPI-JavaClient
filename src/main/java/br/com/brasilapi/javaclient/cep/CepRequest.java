@@ -1,5 +1,6 @@
 package br.com.brasilapi.javaclient.cep;
 
+import br.com.brasilapi.javaclient.BrasilApiConfig;
 import br.com.brasilapi.javaclient.Injection;
 import br.com.brasilapi.javaclient.network.ErrorListener;
 import br.com.brasilapi.javaclient.network.SuccessListener;
@@ -23,7 +24,7 @@ public final class CepRequest {
 
     public CepRequest(@NotNull final String cep) {
         this.cep = cep;
-        this.cepApi = Injection.provideCepApi();
+        this.cepApi = Injection.provideCepApi(BrasilApiConfig.of(null));
     }
 
     @NotNull

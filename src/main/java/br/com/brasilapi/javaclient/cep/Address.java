@@ -55,4 +55,15 @@ public final class Address {
     public String getNeighborhood() {
         return neighborhood;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "cep='" + cep + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", neighborhood='" + neighborhood + '\'' +
+                '}';
+    }
 }

@@ -1,13 +1,9 @@
 package br.com.brasilapi.javaclient.config;
 
 import br.com.brasilapi.javaclient.Injection;
-import br.com.brasilapi.javaclient.network.NetworkConstants;
+import br.com.brasilapi.javaclient.Constants;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Retrofit;
-import retrofit2.converter.moshi.MoshiConverterFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * Created on 2020-11-22
@@ -15,26 +11,24 @@ import java.util.concurrent.ConcurrentMap;
  * @author Luiz Felipe (https://github.com/luizfp)
  */
 public final class RestClientConfig {
-    private static final Retrofit RETROFIT;
     @NotNull
-    private static final ConcurrentMap<String, Object> SERVICE_CACHE = new ConcurrentHashMap<>();
+    private final Retrofit retrofit;
 
-    static {
-        RETROFIT = new Retrofit.Builder()
+    public RestClientConfig(@NotNull final OkHttpConfig config) {
+        this.retrofit = createRestClient(config);
+    }
+
+    @NotNull
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
+    @NotNull
+    private Retrofit createRestClient(@NotNull final OkHttpConfig config) {
+        return new Retrofit.Builder()
                 .addConverterFactory(Injection.provideMoshiConverterFactory())
-                .baseUrl(NetworkConstants.BASE_API_URL)
-                .client(Injection.provideOkHttpClient())
+                .baseUrl(Constants.BASE_API_URL)
+                .client(config.getOkHttpClient())
                 .build();
-    }
-
-    private RestClientConfig() {
-
-    }
-
-    @NotNull
-    public static <T> T getService(@NotNull final Class<T> serviceClass) {
-        final String canonicalName = serviceClass.getCanonicalName();
-        //noinspection unchecked
-        return (T) SERVICE_CACHE.computeIfAbsent(canonicalName, key -> RETROFIT.create(serviceClass));
     }
 }

@@ -1,5 +1,6 @@
 package br.com.brasilapi.javaclient.config;
 
+import br.com.brasilapi.javaclient.BrasilApiConfig;
 import okhttp3.OkHttpClient;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,25 +12,24 @@ import java.util.concurrent.TimeUnit;
  * @author Luiz Felipe (https://github.com/luizfp)
  */
 public final class OkHttpConfig {
-    private static final long DEFAULT_TIMEOUT_SECONDS = TimeUnit.SECONDS.toSeconds(30);
     @NotNull
-    private static final OkHttpClient DEFAULT_CLIENT;
+    private final OkHttpClient okHttpClient;
 
-    static {
-        final OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-
-        DEFAULT_CLIENT = builder.build();
-    }
-
-    private OkHttpConfig() {
-        throw new IllegalStateException(OkHttpConfig.class.getSimpleName() + " cannot be instantiated!");
+    public OkHttpConfig(@NotNull final BrasilApiConfig config) {
+        this.okHttpClient = createNetworkClient(config);
     }
 
     @NotNull
-    public static OkHttpClient provideNetworkDefaultClient() {
-        return DEFAULT_CLIENT;
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
+
+    @NotNull
+    private OkHttpClient createNetworkClient(@NotNull final BrasilApiConfig config) {
+        return new OkHttpClient.Builder()
+                .connectTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS)
+                .readTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS)
+                .writeTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS)
+                .build();
     }
 }
