@@ -18,7 +18,7 @@ public final class BrasilApi {
     private final CepApi cepApi;
 
     public BrasilApi() {
-        this.cepApi = new CepApi(new CallExecutor(new DefaultResponseHandler(), new CepErrorHandler(new JsonParser())));
+        this.cepApi = Injection.provideCepApi();
     }
 
     @NotNull
