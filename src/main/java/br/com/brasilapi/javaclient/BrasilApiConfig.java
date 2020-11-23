@@ -1,10 +1,10 @@
 package br.com.brasilapi.javaclient;
 
-import br.com.brasilapi.javaclient.util.Verifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
+import java.util.Objects;
 
 /**
  * Created on 2020-11-23
@@ -39,7 +39,7 @@ public final class BrasilApiConfig {
         @NotNull
         public BrasilApiConfig build() {
             return new BrasilApiConfig(
-                    Verifier.checkNotNull(networkTimeout, "networkTimeout cannot be null!")
+                    Objects.requireNonNull(networkTimeout, "networkTimeout cannot be null!")
             );
         }
     }

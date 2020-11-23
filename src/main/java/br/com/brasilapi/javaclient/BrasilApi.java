@@ -2,10 +2,6 @@ package br.com.brasilapi.javaclient;
 
 import br.com.brasilapi.javaclient.cep.Address;
 import br.com.brasilapi.javaclient.cep.CepApi;
-import br.com.brasilapi.javaclient.cep.error.CepErrorHandler;
-import br.com.brasilapi.javaclient.json.JsonParser;
-import br.com.brasilapi.javaclient.network.request.CallExecutor;
-import br.com.brasilapi.javaclient.network.request.DefaultResponseHandler;
 import org.jetbrains.annotations.NotNull;
 
 /**
