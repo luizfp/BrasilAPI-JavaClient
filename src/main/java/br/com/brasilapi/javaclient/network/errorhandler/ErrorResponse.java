@@ -4,8 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import retrofit2.Response;
 
-import java.io.IOException;
-
 /**
  * Created on 2020-11-22
  *
@@ -28,9 +26,14 @@ public final class ErrorResponse {
         return !isResponseNull() && errorResponse.errorBody() != null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @NotNull
-    public String getErrorBody() throws IOException {
-        return errorResponse.errorBody().string();
+    public String getErrorBody() {
+        try {
+            return errorResponse.errorBody().string();
+        } catch (final Throwable ignored) {
+            return "";
+        }
     }
 
     private boolean isResponseNull() {
