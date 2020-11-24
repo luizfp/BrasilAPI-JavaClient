@@ -7,6 +7,10 @@ package br.com.brasilapi.javaclient.network.errorhandler;
  */
 public class BrasilApiException extends RuntimeException {
 
+    public BrasilApiException() {
+
+    }
+
     public BrasilApiException(final String message) {
         super(message);
     }

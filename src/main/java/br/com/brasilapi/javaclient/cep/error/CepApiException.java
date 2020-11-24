@@ -13,7 +13,6 @@ public final class CepApiException extends BrasilApiException {
     private final CepError error;
 
     public CepApiException(@NotNull final CepError error) {
-        super("");
         this.error = error;
     }
 

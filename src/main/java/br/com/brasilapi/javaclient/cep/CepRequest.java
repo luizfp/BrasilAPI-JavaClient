@@ -25,6 +25,8 @@ public final class CepRequest {
     private final CepApi cepApi;
     @NotNull
     private final String cep;
+    @Nullable
+    private Address address;
 
     public CepRequest(@NotNull final CepApi cepApi,
                       @NotNull final String cep) {
@@ -45,17 +47,23 @@ public final class CepRequest {
     }
 
     @NotNull
-    public Optional<Address> execute() {
+    public Optional<Address> thenReturning() {
+        internalExecute();
+        return Optional.ofNullable(address);
+    }
+
+    public void execute() {
+        internalExecute();
+    }
+
+    private void internalExecute() {
         final CepResponse response = cepApi.findByCep(cep);
         if (response.wasSuccessful()) {
-            final Address address = ((CepSuccessResponse) response).getAddress();
+            address = ((CepSuccessResponse) response).getAddress();
             fireSuccess(address);
-            return Optional.of(address);
         } else {
             fireError(((CepErrorResponse) response).getCepError());
         }
-
-        return Optional.empty();
     }
 
     private void fireSuccess(@NotNull final Address address) {

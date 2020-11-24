@@ -1,13 +1,11 @@
 package br.com.brasilapi.javaclient;
 
-import br.com.brasilapi.javaclient.cep.Address;
 import br.com.brasilapi.javaclient.cep.CepApi;
 import br.com.brasilapi.javaclient.cep.CepRequest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
-import java.util.Objects;
 
 /**
  * Created on 2020-11-22
