@@ -7,6 +7,8 @@ import br.com.brasilapi.javaclient.network.SuccessListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 /**
  * Created on 2020-11-22
  *
@@ -18,13 +20,14 @@ public final class CepRequest {
     @Nullable
     private ErrorListener errorListener;
     @NotNull
-    private final String cep;
-    @NotNull
     private final CepApi cepApi;
+    @NotNull
+    private final String cep;
 
-    public CepRequest(@NotNull final String cep) {
+    public CepRequest(@NotNull final CepApi cepApi,
+                      @NotNull final String cep) {
+        this.cepApi = cepApi;
         this.cep = cep;
-        this.cepApi = Injection.provideCepApi(BrasilApiConfig.of(null));
     }
 
     @NotNull
@@ -39,13 +42,17 @@ public final class CepRequest {
         return this;
     }
 
-    public void execute() {
+    @NotNull
+    public Optional<Address> execute() {
         try {
             final Address address = cepApi.findByCep(cep);
             fireSuccess(address);
+            return Optional.of(address);
         } catch (final Throwable throwable) {
             fireError(throwable);
         }
+
+        return Optional.empty();
     }
 
     private void fireSuccess(@NotNull final Address address) {

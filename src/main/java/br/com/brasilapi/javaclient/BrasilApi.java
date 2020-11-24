@@ -2,6 +2,7 @@ package br.com.brasilapi.javaclient;
 
 import br.com.brasilapi.javaclient.cep.Address;
 import br.com.brasilapi.javaclient.cep.CepApi;
+import br.com.brasilapi.javaclient.cep.CepRequest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,8 +23,8 @@ public final class BrasilApi {
     }
 
     @NotNull
-    public Address findByCep(@NotNull final String cep) {
-        return cepApi.findByCep(cep);
+    public CepRequest findByCep(@NotNull final String cep) {
+        return new CepRequest(cepApi, cep);
     }
 
     public static final class Builder {
