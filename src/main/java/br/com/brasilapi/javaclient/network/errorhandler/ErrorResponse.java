@@ -24,10 +24,6 @@ public final class ErrorResponse {
         return new ErrorResponse(errorResponse);
     }
 
-    public boolean isResponseNull() {
-        return errorResponse == null;
-    }
-
     public boolean hasErrorBody() {
         return !isResponseNull() && errorResponse.errorBody() != null;
     }
@@ -35,5 +31,9 @@ public final class ErrorResponse {
     @NotNull
     public String getErrorBody() throws IOException {
         return errorResponse.errorBody().string();
+    }
+
+    private boolean isResponseNull() {
+        return errorResponse == null;
     }
 }

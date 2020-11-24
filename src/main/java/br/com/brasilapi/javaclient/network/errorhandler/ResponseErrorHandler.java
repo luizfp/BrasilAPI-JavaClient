@@ -25,16 +25,12 @@ public abstract class ResponseErrorHandler<T> {
         if (throwable instanceof RequestException) {
             final RequestException requestException = (RequestException) throwable;
             final ErrorResponse errorResponse = requestException.getErrorResponse();
-            if (errorResponse.isResponseNull()) {
-                if (errorResponse.hasErrorBody()) {
-                    return tryParseErrorResponse(errorResponse)
-                            .map(this::buildCustomException)
-                            .orElseGet(() -> new BrasilApiException("Error to parse body!"));
-                } else {
-                    return new BrasilApiException("No error body!");
-                }
+            if (errorResponse.hasErrorBody()) {
+                return tryParseErrorResponse(errorResponse)
+                        .map(this::buildCustomException)
+                        .orElseGet(() -> new BrasilApiException("Error to parse body!"));
             } else {
-                return new BrasilApiException("response was null!");
+                return new BrasilApiException("No error body!");
             }
         } else {
             return new BrasilApiException("Unknown exception");

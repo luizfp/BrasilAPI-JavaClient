@@ -35,4 +35,13 @@ public final class CepErrorCause {
     public String getService() {
         return service;
     }
+
+    @Override
+    public String toString() {
+        return "CepErrorCause{" +
+                "name='" + name + '\'' +
+                ", message='" + message + '\'' +
+                ", service='" + service + '\'' +
+                '}';
+    }
 }

@@ -2,6 +2,7 @@ package br.com.brasilapi.javaclient.cep;
 
 import br.com.brasilapi.javaclient.BrasilApiConfig;
 import br.com.brasilapi.javaclient.Injection;
+import br.com.brasilapi.javaclient.cep.error.CepError;
 import br.com.brasilapi.javaclient.network.ErrorListener;
 import br.com.brasilapi.javaclient.network.SuccessListener;
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +64,7 @@ public final class CepRequest {
 
     private void fireError(@Nullable final Throwable throwable) {
         if (errorListener != null) {
-            errorListener.onError(null);
+            errorListener.onError(CepError.of(throwable));
         }
     }
 }

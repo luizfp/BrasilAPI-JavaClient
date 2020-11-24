@@ -1,6 +1,5 @@
 package br.com.brasilapi.javaclient.network;
 
-import br.com.brasilapi.javaclient.cep.Address;
 import br.com.brasilapi.javaclient.cep.error.CepError;
 import org.jetbrains.annotations.NotNull;
 
