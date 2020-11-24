@@ -25,9 +25,12 @@ final BrasilApi brasilApi = new BrasilApi.Builder()
         .withNetworkTimeout(Duration.ofSeconds(30))
         .build();
 
-final Optional<Address> address = brasilApi
+final Address address = brasilApi
         .findByCep("05010000")
-        .execute();
+        .doOnError(error -> {
+
+        })
+        .thenReturning();
 ```
 
 #### Caso você prefira callbacks de retorno:
