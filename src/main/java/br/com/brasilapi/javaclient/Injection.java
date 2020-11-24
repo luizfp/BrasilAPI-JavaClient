@@ -1,6 +1,7 @@
 package br.com.brasilapi.javaclient;
 
 import br.com.brasilapi.javaclient.cep.CepApi;
+import br.com.brasilapi.javaclient.cep.CepApiImpl;
 import br.com.brasilapi.javaclient.cep.error.CepErrorHandler;
 import br.com.brasilapi.javaclient.config.MoshiConfig;
 import br.com.brasilapi.javaclient.config.OkHttpConfig;
@@ -28,7 +29,7 @@ public final class Injection {
 
     @NotNull
     public static CepApi provideCepApi(@NotNull final BrasilApiConfig config) {
-        return new CepApi(Injection.provideServiceLocator(config), Injection.provideCallExecutor());
+        return new CepApiImpl(Injection.provideServiceLocator(config), Injection.provideCallExecutor());
     }
 
     @NotNull
