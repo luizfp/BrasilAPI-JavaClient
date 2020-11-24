@@ -1,8 +1,11 @@
 package br.com.brasilapi.javaclient.cep;
 
+import br.com.brasilapi.javaclient.cep.error.CepError;
+import br.com.brasilapi.javaclient.cep.response.CepErrorResponse;
+import br.com.brasilapi.javaclient.cep.response.CepResponse;
+import br.com.brasilapi.javaclient.cep.response.CepSuccessResponse;
 import br.com.brasilapi.javaclient.network.ServiceLocator;
 import br.com.brasilapi.javaclient.network.request.CallExecutor;
-import br.com.brasilapi.javaclient.config.RestClientConfig;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 
@@ -24,9 +27,14 @@ public final class CepApi {
     }
 
     @NotNull
-    public Address findByCep(@NotNull final String cep) {
+    public CepResponse findByCep(@NotNull final String cep) {
         final CepService service = serviceLocator.getService(CepService.class);
         final Call<Address> call = service.findByCep(cep);
-        return callExecutor.execute(call);
+        try {
+            final Address address = callExecutor.execute(call);
+            return new CepSuccessResponse(address);
+        } catch (final Throwable throwable) {
+            return new CepErrorResponse(CepError.of(throwable));
+        }
     }
 }

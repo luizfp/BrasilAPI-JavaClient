@@ -1,8 +1,9 @@
 package br.com.brasilapi.javaclient.cep;
 
-import br.com.brasilapi.javaclient.BrasilApiConfig;
-import br.com.brasilapi.javaclient.Injection;
 import br.com.brasilapi.javaclient.cep.error.CepError;
+import br.com.brasilapi.javaclient.cep.response.CepErrorResponse;
+import br.com.brasilapi.javaclient.cep.response.CepResponse;
+import br.com.brasilapi.javaclient.cep.response.CepSuccessResponse;
 import br.com.brasilapi.javaclient.network.ErrorListener;
 import br.com.brasilapi.javaclient.network.SuccessListener;
 import org.jetbrains.annotations.NotNull;
@@ -45,12 +46,13 @@ public final class CepRequest {
 
     @NotNull
     public Optional<Address> execute() {
-        try {
-            final Address address = cepApi.findByCep(cep);
+        final CepResponse response = cepApi.findByCep(cep);
+        if (response.wasSuccessful()) {
+            final Address address = ((CepSuccessResponse) response).getAddress();
             fireSuccess(address);
             return Optional.of(address);
-        } catch (final Throwable throwable) {
-            fireError(throwable);
+        } else {
+            fireError(((CepErrorResponse) response).getCepError());
         }
 
         return Optional.empty();
@@ -62,9 +64,9 @@ public final class CepRequest {
         }
     }
 
-    private void fireError(@Nullable final Throwable throwable) {
+    private void fireError(@NotNull final CepError error) {
         if (errorListener != null) {
-            errorListener.onError(CepError.of(throwable));
+            errorListener.onError(error);
         }
     }
 }
