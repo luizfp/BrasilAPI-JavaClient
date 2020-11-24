@@ -9,6 +9,12 @@
 ## Atenção
 Este é o cliente Java **não oficial** da <a href="https://github.com/BrasilAPI/BrasilAPI" target="_blank">BrasilAPI</a>!
 
+## Progress 
+- [x] Criar API de busca por CEP
+- [x] Permitir parametrizar configurações da conexão
+- [x] Implementar tratamento de erros
+- [ ] Desenvolver testes
+
 ## Como utilizar
 
 Existem duas formas de utilizar a API.
@@ -39,9 +45,3 @@ brasilApi.findByCep("05010000")
         })
         .execute();
 ```
-
-## Progress 
-- [x] Criar API de busca por CEP
-- [x] Permitir parametrizar configurações da conexão
-- [x] Implementar tratamento de erros
-- [ ] Desenvolver testes
