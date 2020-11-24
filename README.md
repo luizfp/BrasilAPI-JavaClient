@@ -39,3 +39,9 @@ brasilApi.findByCep("05010000")
         })
         .execute();
 ```
+
+## Progress 
+- [x] Criar API de busca por CEP
+- [x] Permitir parametrizar configurações da conexão
+- [x] Implementar tratamento de erros
+- [ ] Desenvolver testes
