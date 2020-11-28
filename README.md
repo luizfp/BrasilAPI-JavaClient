@@ -14,7 +14,7 @@ Este é o cliente Java **não oficial** da <a href="https://github.com/BrasilAPI
 - [x] Permitir parametrizar configurações da conexão
 - [x] Implementar tratamento de erros
 - [X] Implementar sistema de logs HTTP
-- [ ] Desenvolver testes
+- [ ] Desenvolver testes [in progress]
 
 ## Como utilizar
 
