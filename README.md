@@ -116,3 +116,15 @@ Exemplo de log de erro:
 16:25:50.007 [main] DEBUG BrasilAPI - {"name":"CepPromiseError","message":"CEP deve conter exatamente 8 caracteres.","type":"validation_error","errors":[{"message":"CEP informado possui mais do que 8 caracteres.","service":"cep_validation"}]}
 16:25:50.007 [main] DEBUG BrasilAPI - <-- END HTTP (204-byte body)
 ```
+
+Utilize `HttpLogLevel.BASIC` caso você queira logs mais enxutos:
+```
+16:27:55.484 [main] DEBUG BrasilAPI - --> GET https://brasilapi.com.br/api/cep/v1/05010000
+16:27:55.908 [main] DEBUG BrasilAPI - <-- 200 OK https://brasilapi.com.br/api/cep/v1/05010000 (421ms, unknown-length body)
+```
+```
+16:28:28.868 [main] DEBUG BrasilAPI - --> GET https://brasilapi.com.br/api/cep/v1/0501000022
+16:28:29.422 [main] DEBUG BrasilAPI - <-- 400 Bad Request https://brasilapi.com.br/api/cep/v1/0501000022 (551ms, 204-byte body)
+```
+
+Acesse a classe <a href="https://github.com/luizfp/BrasilAPI-JavaClient/blob/dev/src/main/java/br/com/brasilapi/javaclient/log/HttpLogLevel.java" target="_blank">HttpLogLevel</a> para mais informações sobre os níveis de logs.
