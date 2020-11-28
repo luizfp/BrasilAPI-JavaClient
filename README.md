@@ -13,6 +13,7 @@ Este é o cliente Java **não oficial** da <a href="https://github.com/BrasilAPI
 - [x] Criar API de busca por CEP
 - [x] Permitir parametrizar configurações da conexão
 - [x] Implementar tratamento de erros
+- [ ] Implementar sistema de logs
 - [ ] Desenvolver testes
 
 ## Como utilizar
@@ -25,9 +26,12 @@ final BrasilApi brasilApi = new BrasilApi.Builder()
         .withNetworkTimeout(Duration.ofSeconds(30))
         .build();
 
-final Optional<Address> address = brasilApi
+final Address address = brasilApi
         .findByCep("05010000")
-        .execute();
+        .doOnError(error -> {
+
+        })
+        .thenReturning();
 ```
 
 #### Caso você prefira callbacks de retorno:
