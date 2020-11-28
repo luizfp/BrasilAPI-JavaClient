@@ -13,7 +13,7 @@ Este é o cliente Java **não oficial** da <a href="https://github.com/BrasilAPI
 - [x] Criar API de busca por CEP
 - [x] Permitir parametrizar configurações da conexão
 - [x] Implementar tratamento de erros
-- [ ] Implementar sistema de logs
+- [X] Implementar sistema de logs HTTP
 - [ ] Desenvolver testes
 
 ## Como utilizar
