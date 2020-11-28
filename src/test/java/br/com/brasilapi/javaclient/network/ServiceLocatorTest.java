@@ -31,6 +31,15 @@ public class ServiceLocatorTest {
     }
 
     @Test
+    public void givenMultipleServiceGetsThenReturnSameInstance() {
+        final CepService service1 = serviceLocator.getService(CepService.class);
+        final CepService service2 = serviceLocator.getService(CepService.class);
+        final CepService service3 = serviceLocator.getService(CepService.class);
+        assertThat(service1).isSameInstanceAs(service2);
+        assertThat(service1).isSameInstanceAs(service3);
+    }
+
+    @Test
     public void givenANoRealServiceThenLocatorShouldFail() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> serviceLocator.getService(NotAService.class));
     }
