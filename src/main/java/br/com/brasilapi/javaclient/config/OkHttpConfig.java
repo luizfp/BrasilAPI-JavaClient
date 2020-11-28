@@ -1,6 +1,7 @@
 package br.com.brasilapi.javaclient.config;
 
 import br.com.brasilapi.javaclient.BrasilApiConfig;
+import br.com.brasilapi.javaclient.log.AppLogger;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +52,7 @@ public final class OkHttpConfig {
 
     @NotNull
     private HttpLoggingInterceptor createHttpLoggingInterceptor() {
-        final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(AppLogger::debug);
         httpLoggingInterceptor.setLevel(config.getHttpLogLevel().toOkHtppLoggingLevel());
         return httpLoggingInterceptor;
     }
