@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class AppLogger {
     @NotNull
-    private static final Logger DEFAULT_LOGGER = LoggerFactory.getLogger("Brasil-API");
+    private static final Logger DEFAULT_LOGGER = LoggerFactory.getLogger("BrasilAPI");
 
     private AppLogger() {
         throw new IllegalStateException(AppLogger.class.getSimpleName() + " cannot be instantiated!");
