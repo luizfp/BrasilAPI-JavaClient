@@ -2,6 +2,7 @@ package br.com.brasilapi.javaclient.config;
 
 import br.com.brasilapi.javaclient.BrasilApiConfig;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -13,10 +14,13 @@ import java.util.concurrent.TimeUnit;
  */
 public final class OkHttpConfig {
     @NotNull
+    private final BrasilApiConfig config;
+    @NotNull
     private final OkHttpClient okHttpClient;
 
     public OkHttpConfig(@NotNull final BrasilApiConfig config) {
-        this.okHttpClient = createNetworkClient(config);
+        this.config = config;
+        this.okHttpClient = createNetworkClient();
     }
 
     @NotNull
@@ -25,11 +29,30 @@ public final class OkHttpConfig {
     }
 
     @NotNull
-    private OkHttpClient createNetworkClient(@NotNull final BrasilApiConfig config) {
-        return new OkHttpClient.Builder()
+    private OkHttpClient createNetworkClient() {
+        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        addTimeout(builder);
+        addLoggingInterceptor(builder);
+        return builder.build();
+    }
+
+    private void addTimeout(@NotNull final OkHttpClient.Builder builder) {
+        builder
                 .connectTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS)
                 .readTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS)
-                .writeTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS)
-                .build();
+                .writeTimeout(config.getNetworkTimeout().getSeconds(), TimeUnit.SECONDS);
+    }
+
+    private void addLoggingInterceptor(@NotNull final OkHttpClient.Builder builder) {
+        if (config.isHttpLogsEnabled()) {
+            builder.interceptors().add(createHttpLoggingInterceptor());
+        }
+    }
+
+    @NotNull
+    private HttpLoggingInterceptor createHttpLoggingInterceptor() {
+        final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(config.getHttpLogLevel().toOkHtppLoggingLevel());
+        return httpLoggingInterceptor;
     }
 }

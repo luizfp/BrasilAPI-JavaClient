@@ -1,7 +1,7 @@
 package br.com.brasilapi.javaclient;
 
+import br.com.brasilapi.javaclient.log.HttpLogLevel;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 
@@ -12,16 +12,17 @@ import java.time.Duration;
  */
 public final class BrasilApiConfig {
     @NotNull
-    private static final BrasilApiConfig DEFAULT_CONFIG;
-    @NotNull
     private final Duration networkTimeout;
+    @NotNull
+    private final HttpLogLevel httpLogLevel;
+    private final boolean httpLogsEnabled;
 
-    static {
-        DEFAULT_CONFIG = new BrasilApiConfig(Duration.ofSeconds(Constants.DEFAULT_NETWORK_TIMEOUT_SECONDS));
-    }
-
-    private BrasilApiConfig(@NotNull final Duration networkTimeout) {
+    private BrasilApiConfig(@NotNull final Duration networkTimeout,
+                            @NotNull final HttpLogLevel httpLogLevel,
+                            final boolean httpLogsEnabled) {
         this.networkTimeout = networkTimeout;
+        this.httpLogLevel = httpLogLevel;
+        this.httpLogsEnabled = httpLogsEnabled;
     }
 
     @NotNull
@@ -30,11 +31,18 @@ public final class BrasilApiConfig {
     }
 
     @NotNull
-    public static BrasilApiConfig of(@Nullable final Duration networkTimeout) {
-        if (networkTimeout == null) {
-            return BrasilApiConfig.DEFAULT_CONFIG;
-        } else {
-            return new BrasilApiConfig(networkTimeout);
-        }
+    public HttpLogLevel getHttpLogLevel() {
+        return httpLogLevel;
+    }
+
+    public boolean isHttpLogsEnabled() {
+        return httpLogsEnabled;
+    }
+
+    @NotNull
+    public static BrasilApiConfig of(@NotNull final Duration networkTimeout,
+                                     @NotNull final HttpLogLevel httpLogLevel,
+                                     final boolean logsEnabled) {
+        return new BrasilApiConfig(networkTimeout, httpLogLevel, logsEnabled);
     }
 }

@@ -1,14 +1,12 @@
 package br.com.brasilapi.javaclient.network;
 
-import br.com.brasilapi.javaclient.BrasilApiConfig;
 import br.com.brasilapi.javaclient.Injection;
+import br.com.brasilapi.javaclient.TestConfigs;
 import br.com.brasilapi.javaclient.cep.CepService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-
-import java.time.Duration;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -23,7 +21,7 @@ public class ServiceLocatorTest {
 
     @BeforeAll
     public void beforeAll() {
-        this.serviceLocator = Injection.provideServiceLocator(BrasilApiConfig.of(Duration.ZERO));
+        this.serviceLocator = Injection.provideServiceLocator(TestConfigs.DEFAULT_BRASIL_API_CONFIG);
     }
 
     @Test
